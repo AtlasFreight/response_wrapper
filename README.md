@@ -15,16 +15,23 @@ Clone or download the project to your local environment:
 ```bash
 git clone https://github.com/eduard2diaz/api_response_wrapper.git
 ```
+Alternatively, you can add this library as a dependency directly in your project. Follow the instructions below based on your build tool:
 
-Or add it as a dependency in your project:
+- **For Maven:** Add the following to your `pom.xml` file:
+  ```xml
+  <dependency>
+      <groupId>io.github.eduard2diaz</groupId>
+      <artifactId>api_response_wrapper</artifactId>
+      <version>1.0.0-beta</version>
+  </dependency>
+  ```
 
-```xml
-<dependency>
-  <groupId>io.github.eduard2diaz</groupId>
-  <artifactId>api_response_wrapper</artifactId>
-  <version>1.0.0-rc</version>
-</dependency>
-```
+- **For Gradle:** Add the following to your `build.gradle` file:
+  ```groovy
+  dependencies {
+      implementation 'io.github.eduard2diaz:api_response_wrapper:1.0.0-beta'
+  }
+  ```
 
 ## Quick Usage
 
