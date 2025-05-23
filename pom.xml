@@ -6,7 +6,7 @@
 
     <groupId>io.github.eduard2diaz</groupId>
     <artifactId>api_response_wrapper</artifactId>
-    <version>1.0.0-dev8</version>
+    <version>1.0.0-rc</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
