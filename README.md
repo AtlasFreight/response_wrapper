@@ -124,4 +124,4 @@ Contributions are always welcome! If you encounter an issue or have an idea for 
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License.
