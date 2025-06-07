@@ -41,27 +41,13 @@ Suppose you’re handling an error for a missing endpoint. You can construct an 
 
 ```java
 import response.ApiSubError;
-import response.ApiValidationError;
-
 import java.util.List;
 
-// Create custom sub-errors
-List<ApiSubError> additionalErrors = List.of(
-    new ApiValidationError.Builder()
-        .setMessage("Age must be a positive number")
-        .setRejectedValue(-15)
-        .setField("age")
-        .setObject("Person")
-        .build()
-);
-
-// Create the main error object
 ApiError apiError = new ApiError.Builder()
-    .setMessage("Endpoint not found: " + ex.getRequestURL())
-    .setException(ex) // Optional
-    .setStatus(404)
-    .setSubErrors(additionalErrors)
-    .build();
+        .setMessage("Endpoint not found: " + ex.getRequestURL())
+        .setException(ex)
+        .setStatus(404)
+        .build();
 ```
 
 ### Creating Successful and Failed Responses
@@ -99,14 +85,7 @@ For an error scenario:
   "error": {
     "message": "Endpoint not found: /users/20",
     "code": 404,
-    "subErrors": [
-      {
-        "field": "age",
-        "rejectedValue": -15,
-        "message": "Age must be a positive number",
-        "object": "Person"
-      }
-    ]
+    "subErrors": []
   }
 }
 ```
