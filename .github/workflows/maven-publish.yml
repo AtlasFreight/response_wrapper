@@ -23,18 +23,35 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace }}
 
+      - name: Create settings.xml with token
+        run: |
+          cat > settings.xml << EOF
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                                        http://maven.apache.org/xsd/settings-1.0.0.xsd">
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${{ github.actor }}</username>
+                <password>${{ secrets.PKG_TOKEN }}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+        shell: bash
+
       - name: Debug token availability
         run: |
           echo "Token name: PKG_TOKEN"
-          echo "Token preview: ${PKG_TOKEN:0:10}..." # Mostrar primeros 10 chars
-          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Token preview: ${{ secrets.PKG_TOKEN }}"
 
-      - name: Build and Deploy with PKG_TOKEN
-        run: mvn -B clean deploy -Dgithub.actor=AtlasFreight
+      - name: Build and Deploy
+        run: mvn -B clean deploy --settings settings.xml
         env:
           GITHUB_TOKEN: ${{ secrets.PKG_TOKEN }}
 
       - name: Verify deployment
         run: |
           echo "Deployment completed successfully!"
-          echo "Check packages at: https://github.com/AtlasFreight/response_wrapper/packages"
+          echo "Check packages at: https://github.com/${{ github.repository }}/packages"
