@@ -6,7 +6,7 @@
 
     <groupId>com.atlasfreight</groupId>
     <artifactId>response-wrapper</artifactId>
-    <version>1.0.0-beta</version>
+    <version>1.0.0-beta3</version>
     <packaging>jar</packaging>
 
     <name>Response Wrapper</name>
