@@ -1,7 +1,7 @@
-package com.atlasfreight.response;
+package com.atlasfreight.response.error;
 
+import com.atlasfreight.response.error.suberror.ApiSubError;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -26,10 +26,7 @@ import java.util.Objects;
  * @author Eduardo Díaz
  * @version 1.0
  * @see ApiSubError
- * @see ApiValidationError
- * @see ApiBusinessError
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public record ApiError(
         int status,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
@@ -49,22 +46,18 @@ public record ApiError(
      * @throws IllegalArgumentException if status is not an error code or message is invalid
      */
     public ApiError {
-        // Validación del código de estado
         if (status < 400 || status >= 600) {
             throw new IllegalArgumentException("Status code must be in the 4xx or 5xx range for errors");
         }
 
-        // Validación del mensaje
         if (message == null || message.isBlank()) {
             throw new IllegalArgumentException("Error message cannot be null or blank");
         }
 
-        // Inmutabilidad de la lista de sub-errores
         subErrors = subErrors != null ?
                 Collections.unmodifiableList(subErrors) :
                 Collections.emptyList();
 
-        // Timestamp automático si no se proporciona
         timestamp = Objects.requireNonNullElse(timestamp, LocalDateTime.now());
     }
 
@@ -74,59 +67,8 @@ public record ApiError(
      * @param status the HTTP status code
      * @param message the user-friendly error message
      */
-    public ApiError(int status, String message) {
-        this(status, LocalDateTime.now(), message, null, Collections.emptyList());
-    }
-
-    /**
-     * Convenience constructor with automatic timestamp.
-     *
-     * @param status the HTTP status code
-     * @param message the user-friendly error message
-     * @param debugMessage detailed technical information for debugging
-     */
-    public ApiError(int status, String message, String debugMessage) {
-        this(status, LocalDateTime.now(), message, debugMessage, Collections.emptyList());
-    }
-
-    /**
-     * Convenience constructor with automatic timestamp.
-     *
-     * @param status the HTTP status code
-     * @param message the user-friendly error message
-     * @param subErrors list of specific sub-errors
-     */
-    public ApiError(int status, String message, List<ApiSubError> subErrors) {
-        this(status, LocalDateTime.now(), message, null, subErrors);
-    }
-
-    /**
-     * Returns whether this error contains any sub-errors.
-     *
-     * @return true if there are sub-errors, false otherwise
-     */
-    public boolean hasSubErrors() {
-        return subErrors != null && !subErrors.isEmpty();
-    }
-
-    /**
-     * Returns the number of sub-errors contained in this error.
-     *
-     * @return the count of sub-errors
-     */
-    public int getSubErrorCount() {
-        return subErrors != null ? subErrors.size() : 0;
-    }
-
-    @Override
-    public String toString() {
-        return "ApiError{" +
-                "status=" + status +
-                ", timestamp=" + timestamp +
-                ", message='" + message + '\'' +
-                ", debugMessage='" + debugMessage + '\'' +
-                ", subErrorsCount=" + getSubErrorCount() +
-                '}';
+    public ApiError(int status, String message, String debugMessage, List<ApiSubError> subErrors) {
+        this(status, LocalDateTime.now(), message, debugMessage, subErrors);
     }
 
     /**

@@ -1,38 +1,7 @@
-/**
- * Provides standardized response patterns for microservices architecture.
- *
- * <p>This package contains classes and interfaces that implement the Result Pattern
- * to normalize API responses across microservices. It enables consistent handling
- * of both successful responses and error conditions, improving API contract clarity
- * and client-side processing.</p>
- *
- * <p>Key features include:
- * <ul>
- *   <li>Type-safe response handling with generics</li>
- *   <li>Standardized error structure with status codes and timestamps</li>
- *   <li>Support for nested validation and business errors</li>
- *   <li>Compatibility with JSON serialization frameworks</li>
- *   <li>Functional-style methods for response transformation</li>
- * </ul>
- * </p>
- *
- * <p>Example usage:
- * <pre>{@code
- * Response<User> response = userService.getUser(id);
- * if (response.isSuccess()) {
- *     User user = response.getData().orElseThrow();
- *     // Process user data
- * } else {
- *     ApiError error = response.getError().orElseThrow();
- *     // Handle error appropriately
- * }
- * }</pre>
- * </p>
- *
- * @author Eduardo Díaz
- * @version 1.0
- */
-package response;
+package com.atlasfreight.response;
+
+import java.util.Optional;
+import com.atlasfreight.response.error.ApiError;
 
 /**
  * Defines a contract for standardized API responses in a microservices architecture.
@@ -74,14 +43,4 @@ public interface ResponsePattern<T> {
      * @return an {@link Optional} containing the response data if available, empty otherwise
      */
     Optional<T> getData();
-
-    /**
-     * Returns the HTTP status code associated with the response.
-     *
-     * <p>For successful responses, this typically returns 2xx status codes.
-     * For errors, this returns the appropriate 4xx or 5xx status code.</p>
-     *
-     * @return the HTTP status code representing the response outcome
-     */
-    int getStatusCode();
 }
