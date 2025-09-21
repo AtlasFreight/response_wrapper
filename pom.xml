@@ -4,29 +4,100 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.eduard2diaz</groupId>
-    <artifactId>api_response_wrapper</artifactId>
+    <groupId>com.atlasfreight</groupId>
+    <artifactId>response-wrapper</artifactId>
     <version>1.0.0-beta</version>
+    <packaging>jar</packaging>
+
+    <name>Response Wrapper</name>
+    <description>Standardized response container for API operations in microservices architecture</description>
+    <url>https://github.com/AtlasFreight/response_wrapper</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Eduardo Díaz</name>
+            <email>eduard2diaz1990@gmail.com</email>
+            <organization>AtlasFreight</organization>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/AtlasFreight/response_wrapper.git</connection>
+        <developerConnection>scm:git:ssh://github.com/AtlasFreight/response_wrapper.git</developerConnection>
+        <url>https://github.com/AtlasFreight/response_wrapper</url>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/AtlasFreight/response_wrapper</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jackson.version>2.18.3</jackson.version>
     </properties>
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/eduard2diaz/api_response_wrapper</url>
-        </repository>
-    </distributionManagement>
 
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.18.3</version>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>21</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
