@@ -2,11 +2,21 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                               http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
     <servers>
         <server>
             <id>github</id>
-            <username>${env.GITHUB_ACTOR}</username>
-            <password>${env.GITHUB_TOKEN}</password>
+            <username>AtlasFreight</username>
+            <password>${env.PKG_TOKEN}</password>  <!-- ✅ Usando PKG_TOKEN -->
+            <configuration>
+                <httpHeaders>
+                    <property>
+                        <name>Authorization</name>
+                        <value>token ${env.PKG_TOKEN}</value>  <!-- ✅ PKG_TOKEN -->
+                    </property>
+                </httpHeaders>
+            </configuration>
         </server>
     </servers>
+
 </settings>
