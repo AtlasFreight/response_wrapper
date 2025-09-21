@@ -118,3 +118,11 @@ Standardized response container for API operations in microservices architecture
 - Type-safe error handling
 - HTTP status code support
 - Jackson JSON serialization
+# Response Wrapper Library
+Standardized response container for API operations in microservices architecture.
+
+## Features
+- Result pattern implementation
+- Type-safe error handling
+- HTTP status code support
+- Jackson JSON serialization
