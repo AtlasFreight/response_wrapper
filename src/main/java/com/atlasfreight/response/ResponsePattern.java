@@ -15,7 +15,7 @@ import com.atlasfreight.response.error.ApiError;
  * @author Eduardo Díaz
  * @version 1.0
  */
-public interface ResponsePattern<T> {
+public sealed interface ResponsePattern<T> permits Response {
 
     /**
      * Indicates whether the operation was successful.
