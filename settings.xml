@@ -7,12 +7,12 @@
         <server>
             <id>github</id>
             <username>AtlasFreight</username>
-            <password>${env.PKG_TOKEN}</password>  <!-- ✅ Usando PKG_TOKEN -->
+            <password>${secrets.PKG_TOKEN}</password>
             <configuration>
                 <httpHeaders>
                     <property>
                         <name>Authorization</name>
-                        <value>token ${env.PKG_TOKEN}</value>  <!-- ✅ PKG_TOKEN -->
+                        <value>token ${secrets.PKG_TOKEN}</value>
                     </property>
                 </httpHeaders>
             </configuration>
