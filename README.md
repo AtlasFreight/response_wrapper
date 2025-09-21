@@ -110,3 +110,11 @@ Contributions are always welcome! If you encounter an issue or have an idea for 
 
 ## License
 This project is licensed under the MIT License.# response_wrapper
+# Response Wrapper Library
+Standardized response container for API operations in microservices architecture.
+
+## Features
+- Result pattern implementation
+- Type-safe error handling
+- HTTP status code support
+- Jackson JSON serialization
