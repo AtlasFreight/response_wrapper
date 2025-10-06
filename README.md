@@ -13,24 +13,17 @@ A lightweight and efficient tool for managing API responses. This library makes 
 Clone or download the project to your local environment:
 
 ```bash
-git clone https://github.com/eduard2diaz/api_response_wrapper.git
+git clone https://github.com/AtlasFreight/response_wrapper.git
 ```
 Alternatively, you can add this library as a dependency directly in your project. Follow the instructions below based on your build tool:
 
 - **For Maven:** Add the following to your `pom.xml` file:
   ```xml
   <dependency>
-      <groupId>io.github.eduard2diaz</groupId>
-      <artifactId>api_response_wrapper</artifactId>
-      <version>1.0.0-beta</version>
+    <groupId>com.atlasfreight</groupId>
+    <artifactId>response-wrapper</artifactId>
+    <version>1.0.0.dev1</version>
   </dependency>
-  ```
-
-- **For Gradle:** Add the following to your `build.gradle` file:
-  ```groovy
-  dependencies {
-      implementation 'io.github.eduard2diaz:api_response_wrapper:1.0.0-beta'
-  }
   ```
 
 ## Quick Usage
@@ -44,10 +37,10 @@ import response.ApiSubError;
 import java.util.List;
 
 ApiError apiError = new ApiError.Builder()
-        .setMessage("Endpoint not found: " + ex.getRequestURL())
-        .setException(ex)
-        .setStatus(404)
-        .build();
+    .setMessage("Endpoint not found: " + ex.getRequestURL())
+    .setException(ex)
+    .setStatus(404)
+    .build();
 ```
 
 ### Creating Successful and Failed Responses
