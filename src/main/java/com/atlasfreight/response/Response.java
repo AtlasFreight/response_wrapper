@@ -16,7 +16,7 @@ import java.util.function.Function;
  *
  * @param <T> the type of data contained in a successful response
  * @param success indicates whether the operation was successful
- * @param apiError the error details if the operation failed, null otherwise
+ * @param error the error details if the operation failed, null otherwise
  * @param data the response data if the operation was successful, null otherwise
  *
  * @author Eduardo Díaz
@@ -26,7 +26,7 @@ import java.util.function.Function;
  */
 public record Response<T>(
         boolean success,
-        ApiError apiError,
+        ApiError error,
         T data
 ) implements ResponsePattern<T> {
 
@@ -34,11 +34,11 @@ public record Response<T>(
      * Compact constructor for validation.
      */
     public Response {
-        if (!success && Objects.isNull(apiError)) {
+        if (!success && Objects.isNull(error)) {
             throw new IllegalArgumentException("ApiError cannot be null for failed responses");
         }
 
-        if (success && Objects.nonNull(apiError)) {
+        if (success && Objects.nonNull(error)) {
             throw new IllegalArgumentException("Successful responses cannot have an ApiError");
         }
 
@@ -90,7 +90,7 @@ public record Response<T>(
     @Override
     public Optional<ApiError> getError() {
         // Because Optional.ofNullable(null) == Optional.empty();
-        return Optional.ofNullable(apiError);
+        return Optional.ofNullable(error);
     }
 
     @Override
@@ -100,7 +100,7 @@ public record Response<T>(
 
     public <U> Response<U> map(Function<T, U> mapper) {
         if (!success) {
-            return Response.Builder.failure(apiError);
+            return Response.Builder.failure(error);
         }
         return Response.Builder.success(mapper.apply(data));
     }
@@ -114,7 +114,7 @@ public record Response<T>(
 
     public Response<T> ifFailure(Consumer<ApiError> consumer) {
         if (!success) {
-            consumer.accept(apiError);
+            consumer.accept(error);
         }
         return this;
     }
